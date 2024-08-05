@@ -22,9 +22,7 @@ function App() {
       const result = res?.data;
       setProducts(result);
       getCategories(result);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const getCategories = (products) => {
@@ -37,7 +35,7 @@ function App() {
 
   useEffect(() => {
     getProducts();
-  });
+  }, []);
 
   useEffect(() => {
     getCategories(products);

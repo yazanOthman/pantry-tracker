@@ -115,7 +115,7 @@ const ProductCard = ({
     if (quantity > 0) {
       setQuantity((prevQuantity) => {
         const newQuantity = prevQuantity - 1;
-        console.log(newQuantity);
+
         const debouncedUpdate = debounce(async () => {
           try {
             const result = await axios.patch(
@@ -124,7 +124,6 @@ const ProductCard = ({
                 quantity: newQuantity,
               }
             );
-            console.log(result);
           } catch (error) {
             console.error("Failed to update item quantity:", error);
             return prevQuantity;

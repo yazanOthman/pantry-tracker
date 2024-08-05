@@ -17,7 +17,6 @@ const Products = ({ initialProducts, onRemove }) => {
   const title = GetActiveRoute().split("/")[1].replace("-", " ");
   const activeUrl = GetActiveRoute().split("/")[1];
   const [products, setProducts] = useState([]);
-  console.log(initialProducts);
 
   useEffect(() => {
     setProducts(
