@@ -8,7 +8,12 @@ const app = express();
 
 app.use(express.json());
 app.use("/uploads", express.static(`${__dirname}/src/uploads`));
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: "https://pantry-tracker-six-tawny.vercel.app",
+    credentials: true,
+  })
+);
 
 app.use("/api/v1", inventoryRoutes);
 
