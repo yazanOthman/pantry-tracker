@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/uploads", express.static(`${__dirname}/src/uploads`));
 app.use(
   cors({
-    origin: "https://pantry-tracker-six-tawny.vercel.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );

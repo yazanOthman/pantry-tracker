@@ -1,6 +1,4 @@
 const Inventory = require("../models/products");
-const uploadFolder = __dirname.replace("/controllers", "/uploads");
-const download = require("image-downloader");
 
 const slugify = (text) => {
   return text
@@ -18,26 +16,7 @@ const getProducts = async (req, res) => {
     const inventories = await Inventory.find();
     res.status(200).json(inventories);
   } catch (error) {
-    res.status(401).send("something went wrong");
-  }
-};
-
-const uploadByLink = (req, res, next) => {
-  const { link } = req.body;
-  const newName = `photo${Date.now()}.jpg`;
-  const options = {
-    url: link,
-    dest: `${uploadFolder}/${newName}`,
-  };
-
-  try {
-    const uploadFile = download.image(options);
-    if (!uploadFile) {
-      return res.status(401).send("failed to upload file");
-    }
-    return res.status(200).json({ message: "success", uploadFile });
-  } catch (error) {
-    return res.status(401).send(error);
+    res.status(500).send("Internal server error");
   }
 };
 
@@ -49,7 +28,7 @@ const createProduct = async (req, res) => {
     const item = await Inventory.create(payload);
     res.status(200).json({ message: "success", item });
   } catch (error) {
-    res.status(401).send("something went wrong");
+    res.status(500).send("Internal server error");
   }
 };
 
@@ -60,7 +39,7 @@ const updateProductQuantity = async (req, res) => {
     const updatedItem = await Inventory.findOneAndUpdate({ _id: id }, req.body);
     res.status(200).json(updatedItem);
   } catch (error) {
-    res.status(500).json({ error: "Failed to update item quantity" });
+    res.status(500).send("Internal server error");
   }
 };
 
@@ -74,14 +53,13 @@ const deleteProduct = async (req, res) => {
     }
     res.status(200).json({ message: "success", item });
   } catch (error) {
-    res.status(401).send("something went wrong");
+    res.status(500).send("Internal server error");
   }
 };
 
 module.exports = {
   getProducts,
   createProduct,
-  uploadByLink,
   deleteProduct,
   updateProductQuantity,
 };
