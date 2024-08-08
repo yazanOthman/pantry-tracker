@@ -7,7 +7,6 @@ const inventoryRoutes = require("./src/routers/products-routes");
 const app = express();
 
 app.use(express.json());
-app.use("/uploads", express.static(`${__dirname}/src/uploads`));
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -15,7 +14,7 @@ app.use(
   })
 );
 
-app.use("/api/v1", inventoryRoutes);
+app.use("/", inventoryRoutes);
 
 const PORT = 5001;
 
