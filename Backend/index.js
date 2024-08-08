@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.use("/", inventoryRoutes);
+app.use("/api/v1", inventoryRoutes);
 
 const PORT = 5001;
 
